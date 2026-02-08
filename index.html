@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For my Kababe ❤️</title>
+    <style>
+        :root {
+            --primary-pink: #ff758c;
+            --secondary-pink: #ff7eb3;
+            --bg-cream: #fff5f7;
+            --text-dark: #4a4a4a;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: 'Segoe UI', cursive, sans-serif;
+            background-color: var(--bg-cream);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .hidden { opacity: 0; pointer-events: none; transform: scale(0.9); }
+
+        h1 { color: var(--text-dark); font-size: 2.8rem; margin-bottom: 10px; padding: 0 20px; }
+        .subtext { color: #888; font-size: 1.1rem; margin-bottom: 40px; }
+
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+            height: 100px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.4rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, background 0.3s ease;
+        }
+
+        #yesBtn {
+            background: linear-gradient(45deg, var(--primary-pink), var(--secondary-pink));
+            color: white;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        #noBtn {
+            background-color: #ffffff;
+            color: #aaa;
+            position: relative; 
+            z-index: 5;
+        }
+
+        /* Dashboard */
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            max-width: 350px;
+            width: 85%;
+            border: 2px solid #fff;
+        }
+
+        .photo-frame {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            border: 6px solid #fff;
+            box-shadow: 0 10px 25px rgba(255, 117, 140, 0.3);
+            overflow: hidden;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .back-btn {
+            margin-top: 25px;
+            background: transparent;
+            color: var(--primary-pink);
+            border: 2px solid var(--primary-pink);
+            padding: 10px 25px;
+            font-size: 0.9rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-pink);
+            color: white;
+        }
+
+        .heart {
+            position: fixed;
+            pointer-events: none;
+            animation: floatUp 4s linear forwards;
+            z-index: 100;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="questionPage" class="page">
+        <h1>Do you love me, Suzzy? 🥺❤️</h1>
+        <p class="subtext">Choose wisely, Kababe… my heart is watching 😌</p>
+        <div class="btn-container">
+            <button id="yesBtn" class="btn" onclick="celebrate()">YES 💖</button>
+            <button id="noBtn" class="btn" onmouseover="dodge()" onclick="dodge()">NO 🙈</button>
+        </div>
+    </div>
+
+    <div id="dashboard" class="page hidden">
+        <div class="card">
+            <div class="photo-frame">
+                <img src="/images/WhatsApp Image 2025-07-08 at 08.19.59_1c00e0c1.jpg" alt="Roses for Suzzy">
+            </div>
+            <h2 style="color: var(--primary-pink);">I knew it, Kababe! 😍❤️</h2>
+            <p style="color: #666; font-style: italic;">“You are my favorite person, Suzzy. My safe place, and my forever smile.”</p>
+            <button class="back-btn" onclick="goBack()">← I want to click YES again!</button>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        let heartInterval;
+
+        function dodge() {
+            noBtn.style.position = 'fixed';
+            const widthLimit = window.innerWidth - noBtn.offsetWidth - 20;
+            const heightLimit = window.innerHeight - noBtn.offsetHeight - 20;
+
+            const randomX = Math.max(20, Math.floor(Math.random() * widthLimit));
+            const randomY = Math.max(20, Math.floor(Math.random() * heightLimit));
+
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        function celebrate() {
+            document.getElementById('questionPage').classList.add('hidden');
+            setTimeout(() => {
+                document.getElementById('questionPage').style.display = 'none';
+                document.getElementById('dashboard').classList.remove('hidden');
+                heartInterval = setInterval(createHeart, 300);
+            }, 600);
+        }
+
+        function goBack() {
+            clearInterval(heartInterval);
+            document.getElementById('dashboard').classList.add('hidden');
+            setTimeout(() => {
+                document.getElementById('questionPage').style.display = 'flex';
+                noBtn.style.position = 'relative';
+                noBtn.style.left = 'auto';
+                noBtn.style.top = 'auto';
+                document.getElementById('questionPage').classList.remove('hidden');
+            }, 600);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            heart.style.color = '#ff758c';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }
+    </script>
+</body>
+</html>
