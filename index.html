@@ -12,17 +12,19 @@
             --text-dark: #4a4a4a;
         }
 
+        /* Standardized Sans-Serif Font for a clean, modern look */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             width: 100%;
-            font-family: 'Segoe UI', cursive, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-cream);
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
+            touch-action: manipulation; /* Optimizes mobile tapping */
         }
 
         .page {
@@ -35,32 +37,44 @@
             align-items: center;
             text-align: center;
             transition: opacity 0.6s ease, transform 0.6s ease;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .hidden { opacity: 0; pointer-events: none; transform: scale(0.9); }
 
-        h1 { color: var(--text-dark); font-size: 2.8rem; margin-bottom: 10px; padding: 0 20px; }
-        .subtext { color: #888; font-size: 1.1rem; margin-bottom: 40px; }
+        h1 { 
+            color: var(--text-dark); 
+            font-size: 2.2rem; /* Adjusted for mobile */
+            margin-bottom: 10px; 
+            font-weight: 700;
+        }
+
+        .subtext { 
+            color: #888; 
+            font-size: 1rem; 
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
 
         .btn-container {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             justify-content: center;
             align-items: center;
             width: 100%;
-            max-width: 500px;
-            height: 100px;
+            min-height: 80px;
         }
 
         .btn {
-            padding: 15px 40px;
-            font-size: 1.4rem;
+            padding: 12px 35px;
+            font-size: 1.2rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 700;
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            transition: transform 0.2s ease, background 0.3s ease;
+            transition: transform 0.2s ease;
         }
 
         #yesBtn {
@@ -71,7 +85,7 @@
 
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.08); }
             100% { transform: scale(1); }
         }
 
@@ -82,24 +96,24 @@
             z-index: 5;
         }
 
-        /* Dashboard */
+        /* Dashboard Card */
         .card {
             background: white;
-            padding: 40px;
-            border-radius: 40px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            max-width: 350px;
-            width: 85%;
+            padding: 30px;
+            border-radius: 35px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            max-width: 340px;
+            width: 100%;
             border: 2px solid #fff;
         }
 
         .photo-frame {
-            width: 200px;
-            height: 200px;
+            width: 180px;
+            height: 180px;
             margin: 0 auto 20px;
             border-radius: 50%;
-            border: 6px solid #fff;
-            box-shadow: 0 10px 25px rgba(255, 117, 140, 0.3);
+            border: 5px solid #fff;
+            box-shadow: 0 8px 20px rgba(255, 117, 140, 0.3);
             overflow: hidden;
         }
 
@@ -110,32 +124,35 @@
         }
 
         .back-btn {
-            margin-top: 25px;
+            margin-top: 20px;
             background: transparent;
             color: var(--primary-pink);
             border: 2px solid var(--primary-pink);
-            padding: 10px 25px;
+            padding: 8px 20px;
             font-size: 0.9rem;
             border-radius: 30px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            font-weight: 600;
         }
 
-        .back-btn:hover {
-            background: var(--primary-pink);
-            color: white;
-        }
-
+        /* Falling Hearts */
         .heart {
             position: fixed;
             pointer-events: none;
             animation: floatUp 4s linear forwards;
             z-index: 100;
+            font-family: serif; /* Emojis look better with system serif */
         }
 
         @keyframes floatUp {
             0% { transform: translateY(100vh) scale(0); opacity: 1; }
             100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        /* Specific Mobile Tweaks */
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8rem; }
+            .btn { padding: 10px 30px; font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -143,20 +160,22 @@
 
     <div id="questionPage" class="page">
         <h1>Do you love me, Suzzy? 🥺❤️</h1>
-        <p class="subtext">Choose wisely, Kababe… my heart is watching 😌</p>
+        <p class="subtext">Choose wisely, Kababe… 😌</p>
         <div class="btn-container">
             <button id="yesBtn" class="btn" onclick="celebrate()">YES 💖</button>
-            <button id="noBtn" class="btn" onmouseover="dodge()" onclick="dodge()">NO 🙈</button>
+            <button id="noBtn" class="btn" onmouseover="dodge()" ontouchstart="dodge()" onclick="dodge()">NO 🙈</button>
         </div>
     </div>
 
     <div id="dashboard" class="page hidden">
         <div class="card">
             <div class="photo-frame">
-                <img src="/images/WhatsApp Image 2025-07-08 at 08.19.59_1c00e0c1.jpg" alt="Roses for Suzzy">
+                <img src="https://www.purpink.co.ke/cdn/shop/files/ROSES_El_AL.png?v=1769524743&width=1024" alt="Roses for Suzzy">
             </div>
-            <h2 style="color: var(--primary-pink);">I knew it, Kababe! 😍❤️</h2>
-            <p style="color: #666; font-style: italic;">“You are my favorite person, Suzzy. My safe place, and my forever smile.”</p>
+            <h2 style="color: var(--primary-pink); font-size: 1.5rem; margin-bottom: 10px;">I knew it, Kababe! 😍❤️</h2>
+            <p style="color: #666; font-size: 1rem; line-height: 1.4; margin-bottom: 15px;">
+                “You are my favorite person, Suzzy. My safe place, and my forever smile.”
+            </p>
             <button class="back-btn" onclick="goBack()">← I want to click YES again!</button>
         </div>
     </div>
@@ -167,11 +186,12 @@
 
         function dodge() {
             noBtn.style.position = 'fixed';
-            const widthLimit = window.innerWidth - noBtn.offsetWidth - 20;
-            const heightLimit = window.innerHeight - noBtn.offsetHeight - 20;
+            // Boundary checks to keep button on screen (especially small phone screens)
+            const widthLimit = window.innerWidth - noBtn.offsetWidth - 30;
+            const heightLimit = window.innerHeight - noBtn.offsetHeight - 30;
 
-            const randomX = Math.max(20, Math.floor(Math.random() * widthLimit));
-            const randomY = Math.max(20, Math.floor(Math.random() * heightLimit));
+            const randomX = Math.max(30, Math.floor(Math.random() * widthLimit));
+            const randomY = Math.max(30, Math.floor(Math.random() * heightLimit));
 
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
