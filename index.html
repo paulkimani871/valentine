@@ -23,10 +23,8 @@ body{
 /* LOGIN / WELCOME OVERLAY */
 #login-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   background: var(--bg);
   display: flex;
   flex-direction: column;
@@ -48,14 +46,12 @@ body{
 }
 
 .login-photo {
-  width: 150px;
-  height: 150px;
+  width: 150px; height: 150px;
   border-radius: 50%;
   margin: 0 auto 20px;
   overflow: hidden;
   border: 5px solid var(--pink);
 }
-
 .login-photo img { width: 100%; height: 100%; object-fit: cover; }
 
 .login-card h2 { color: var(--pink); margin-bottom: 15px; font-size: 1.8rem; }
@@ -73,13 +69,10 @@ body{
   font-weight: bold;
 }
 
-.enter-btn:hover { background: #e04a7a; transform: scale(1.05); }
-
 /* THE BACK BUTTON */
 #back-btn {
   position: fixed;
-  bottom: 20px;
-  left: 20px;
+  bottom: 20px; left: 20px;
   background: white;
   color: var(--pink);
   border: 2px solid var(--pink);
@@ -88,17 +81,11 @@ body{
   cursor: pointer;
   z-index: 500;
   font-weight: bold;
-  display: none; /* Hidden until page is unlocked */
-  transition: all 0.3s ease;
+  display: none;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-#back-btn:hover {
-  background: var(--pink);
-  color: white;
-}
-
-/* CONTENT STYLES */
+/* CONTENT STYLES - RESTORED TO ORIGINAL DIMENSIONS */
 header{ text-align:center; padding:60px 20px 40px; }
 header h1{font-size:2.6rem; margin-bottom:10px}
 
@@ -107,44 +94,66 @@ header h1{font-size:2.6rem; margin-bottom:10px}
   margin:auto;
   padding:40px 20px;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); /* Back to original size */
   gap:40px;
 }
 
-.card{ background:white; border-radius:30px; padding:35px; box-shadow:0 15px 40px rgba(0,0,0,.12); }
-
-.photo{
-  width:200px; height:200px; margin:auto; border-radius:50%; overflow:hidden;
-  border:6px solid white; box-shadow:0 10px 25px rgba(255,95,143,.35);
-}
-.photo img{width:100%;height:100%;object-fit:cover}
-
-h2,h3{color:var(--pink)}
-p{ line-height:1.7; color:#555; font-size:1.05rem; }
-
-/* GLOWING EMOJIS */
-.glow{
-  position:fixed; pointer-events:none; z-index: 100;
-  animation:float 6s linear forwards, glow 1.8s ease-in-out infinite; opacity:.8;
+.card{ 
+  background:white; 
+  border-radius:30px; 
+  padding:35px; 
+  box-shadow:0 15px 40px rgba(0,0,0,.12); 
+  display: flex;
+  flex-direction: column;
 }
 
-@keyframes float{
-  from{transform:translateY(100vh) scale(0)}
-  to{transform:translateY(-15vh) scale(1.6)}
+/* PHOTO CONTAINER - RESTORED SIZE BUT ALLOWING FULL VIEW */
+.photo-box {
+  width: 200px; /* Original width */
+  height: 200px; /* Original height */
+  margin: auto;
+  border-radius: 20px; /* Soft corners instead of circle */
+  overflow: hidden;
+  border: 6px solid white;
+  box-shadow: 0 10px 25px rgba(255,95,143,.35);
 }
 
-@keyframes glow{
-  0%,100%{filter:drop-shadow(0 0 6px #ff5f8f)}
-  50%{filter:drop-shadow(0 0 18px #ff9ab8)}
+.photo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Shows FULL picture inside the 200x200 box */
+  background: #fdfdfd; 
 }
 
-.video-container{ grid-column:1/-1; text-align:center; margin-top:20px; }
-video{ width:100%; max-width:560px; border-radius:20px; box-shadow:0 10px 25px rgba(255,95,143,.35); }
+h2, h3 { color: var(--pink); }
+p { line-height: 1.7; color: #555; font-size: 1.05rem; }
 
-footer{ text-align:center; padding:50px 20px 60px; color:#777; }
+/* SHINING POPPING EMOJIS */
+.glow {
+  position: fixed;
+  bottom: -50px;
+  pointer-events: none;
+  z-index: 100;
+  animation: floatUp 5s ease-out forwards, shine 1.5s ease-in-out infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) rotate(0deg) scale(0); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(-110vh) rotate(360deg) scale(1.5); opacity: 0; }
+}
+
+@keyframes shine {
+  0%, 100% { filter: drop-shadow(0 0 5px #fff) brightness(1); }
+  50% { filter: drop-shadow(0 0 20px var(--soft)) brightness(1.3); }
+}
+
+.video-container { grid-column: 1/-1; text-align: center; margin-top: 20px; }
+video { width: 100%; max-width: 560px; border-radius: 20px; box-shadow: 0 10px 25px rgba(255,95,143,.35); }
+
+footer { text-align: center; padding: 50px 20px 60px; color: #777; }
 </style>
 </head>
-
 <body>
 
 <div id="login-overlay">
@@ -153,7 +162,7 @@ footer{ text-align:center; padding:50px 20px 60px; color:#777; }
       <img src="images/WhatsApp Image 2026-02-14 at 13.45.07.jpeg" alt="Beautiful">
     </div>
     <h2>Reserved for You ✨</h2>
-    <p>I wanted to share something special. Are you ready to see it?</p>
+    <p>I wanted to share something special. Are you ready?</p>
     <button class="enter-btn" onclick="unlockPage()">Click to Enter 🌸</button>
   </div>
 </div>
@@ -163,12 +172,12 @@ footer{ text-align:center; padding:50px 20px 60px; color:#777; }
 <div id="main-content">
   <header class="observe">
     <h1>Hey You 😏</h1>
-    <p>Valentine’s may have passed… but honestly, you’ve been on my mind a little longer than that.</p>
+    <p>Valentine’s may have passed… but you’ve been on my mind.</p>
   </header>
 
   <section class="container">
     <div class="card observe">
-      <div class="photo">
+      <div class="photo-box">
         <img src="images/WhatsApp Image 2026-02-14 at 13.45.07.jpeg" alt="You">
       </div>
       <h2 style="text-align:center;margin-top:20px">Someone Interesting 💗</h2>
@@ -204,37 +213,42 @@ function unlockPage() {
   overlay.style.opacity = '0';
   setTimeout(() => {
     overlay.style.visibility = 'hidden';
-    backBtn.style.display = 'block'; // Show back button
+    backBtn.style.display = 'block';
   }, 600);
   video.play();
+  // Burst of shining emojis
+  for(let i=0; i<10000; i++) setTimeout(spawnGlow, i * 150);
 }
 
 function lockPage() {
   overlay.style.visibility = 'visible';
   overlay.style.opacity = '1';
-  backBtn.style.display = 'none'; // Hide back button
-  video.pause(); // Stop music when going back
+  backBtn.style.display = 'none';
+  video.pause();
 }
 
-/* GLOW EMOJIS WHILE READING */
-const emojis=["💗","🌸","🌹","✨"];
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
+const emojis = ["💗", "🌸", "🌹", "✨", "🌷", "💖", "💐", "💎"];
+function spawnGlow() {
+  const el = document.createElement("div");
+  el.className = "glow";
+  el.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+  el.style.left = Math.random() * 100 + "vw";
+  el.style.fontSize = (Math.random() * 30 + 20) + "px";
+  el.style.animationDuration = (Math.random() * 3 + 3) + "s";
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 5000);
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
     if(e.isIntersecting) spawnGlow();
   });
-},{threshold:.4});
+}, {threshold: .4});
+document.querySelectorAll(".observe").forEach(el => observer.observe(el));
 
-document.querySelectorAll(".observe").forEach(el=>observer.observe(el));
-
-function spawnGlow(){
-  const el=document.createElement("div");
-  el.className="glow";
-  el.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
-  el.style.left=Math.random()*100+"vw";
-  el.style.fontSize=(Math.random()*22+18)+"px";
-  document.body.appendChild(el);
-  setTimeout(()=>el.remove(),6000);
-}
+window.addEventListener('click', () => {
+    if(overlay.style.visibility === 'hidden') spawnGlow();
+});
 </script>
 
 </body>
